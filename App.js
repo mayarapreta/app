@@ -1,20 +1,77 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React ,{useState} from 'react';
+import { View, StyleSheet,Image,TouchableOpacity} from 'react-native';
+//import Torch from 'react-native';
 
-export default function App() {
+
+const App = () =>{
+
+ const [toggle, setToggle] = useState(false) ;//false
+
+ const handleChangeToggle = () => setToggle((oldToggle) => ! oldToggle); //false or true
+
+
+ 
+ 
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    <View style={ toggle ? style.containerLight : style.container}>
+    
+      <TouchableOpacity  onPress= { handleChangeToggle}>
+ 
+      <Image 
+      style={ toggle ? style.lightingOn : style.lightingOff}
+       source={
+        toggle 
+        ? require('./assets/icons/eco-light.png')
+        : require('./assets/icons/eco-light-off.png')
+       }
+       />
+       <Image 
+      style={ style.dioLogo}
+       source={
+        toggle 
+        ? require('./assets/icons/logo-dio.png')
+        : require('./assets/icons/logo-dio-white.png')
+       }/>
+        </TouchableOpacity>
+        </View>
+      );
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+export default App;
+
+const style = StyleSheet.create({
+  container:{
+    flex:1,
+    backgroundColor:'black',
+    alignItems:'center',
+    justifyContent:'center',
+
   },
-});
+  containerLight:{
+    flex:1,
+    backgroundColor:'white',
+    alignItems:'center',
+    justifyContent:'center',
+  },
+ lightingOn:{
+ resizeMode:'contain',
+ alignSelf:'center',
+ width:120,
+ height:120,
+ },
+ lightingOff:{
+   resizeMode:'contain',
+   alignSelf:'center',
+   tintColor:'white',
+   width:120,
+   height:120,
+ },
+ dioLogo:{
+  resizeMode:'contain',
+  alignSelf:'center',
+  width:250,
+  height:250,
+},
+},
+);
